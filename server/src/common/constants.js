@@ -4,6 +4,7 @@ const INTERNAL_SERVER_ERROR = 500
 const SUCCESS = 200
 const UNAUTHORIZED = 401
 const OK = 'OK'
+const ISO_8601_REGEX = new RegExp('^\\d{4}-\\d{2}-\\d{2}$')
 
 module.exports = {
     BAD_REQUEST,
@@ -11,5 +12,6 @@ module.exports = {
     SUCCESS,
     NOT_FOUND,
     UNAUTHORIZED,
-    OK
+    OK,
+    ISO_8601_REGEX
 }
