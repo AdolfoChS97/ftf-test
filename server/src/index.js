@@ -20,7 +20,7 @@ app.use('/api/v1', routes)
 app.use(
     "/docs",
     swaggerUi.serve,
-    swaggerUi.setup(specs)
+    swaggerUi.setup(specs, { explorer: true }),
   );
 
 log.info(`Swagger Docs loaded at http://localhost:${port}/docs`, 'Bootstraping')
