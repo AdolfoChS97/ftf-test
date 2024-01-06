@@ -15,9 +15,7 @@ getCommits = async (req, res) => {
         }
 
         const result = await getAuthorCommitsByRepo(owner, repo,  { page: query?.page, per_page: query?.perPage, author: query?.author, since: query?.since, until: query?.until })
-
-        res.status(SUCCESS).json({ data: result, message: OK })
-
+        res.status(SUCCESS).json({ data: result, meta: result.length, message: OK })
     } catch (e) {
         res.status(e.status || INTERNAL_SERVER_ERROR).json({ message: e.message })
     }
