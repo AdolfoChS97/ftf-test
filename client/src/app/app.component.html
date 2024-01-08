@@ -31,4 +31,8 @@
   <div *ngIf="commits.length === 0 && isSeeking === true">
     <h4>{{ message }}</h4>
   </div>
+
+  <div *ngIf="commits.length === 0 && isSeeking === false">
+    <h4>{{ message }}</h4>
+  </div>
 </div>

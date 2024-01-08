@@ -58,9 +58,14 @@ export class AppComponent {
       const params: string = this.getUrlParams(rest);
       this.isSeeking = true;
       this.appService.getCommits(owner, repo, params).subscribe((observer) => {
-
         const { data, message } = observer as unknown as ApiCommistResponse;
-        console.log(data, message);
+
+        if(data.length === 0 && message === 'OK') {
+          this.isSeeking = false;
+          this.commits = data;
+          this.message = 'No commits with those parameters';
+        }
+
         if(data.length > 0 && message === 'OK') {
           this.commits = data;
           this.isSeeking = false;
