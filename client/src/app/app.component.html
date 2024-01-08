@@ -1,0 +1,38 @@
+<div>
+  <h3>Github commit scrapper</h3>
+  <small>Please, provider a Github user and repository name to find its commits history</small>
+  <form [formGroup]="githubForm" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="owner" placeholder="Github user" />
+    <input type="text" formControlName="repo" placeholder="Repository name" />
+    
+    <h4>Optional search parameters</h4>
+    <input type="text" formControlName="page" placeholder="Commits page" />
+    
+    <input type="text" formControlName="perPage" placeholder="Commits to obtain" />
+
+    <input type="text" formControlName="author" placeholder="Author" />
+    <input type="text" formControlName="since" placeholder="Since" />
+    <input type="text" formControlName="until" placeholder="Until" />
+  
+    <button type="submit" [disabled]="!githubForm.valid">Get commits</button>
+
+  </form>
+  <div *ngIf="commits.length > 0">
+    <h4>Commits</h4>
+    <ul>
+      <li *ngFor="let commit of commits">
+        <h4>Author: {{ commit.author.name }}</h4>
+        <h5>Email: {{ commit.author.email }}</h5>
+        <h5>Date: {{ commit.author.date | date:'MM/dd/yyyy h:mm a' }}</h5>
+        <small><b>Commit Message</b>: {{ commit.message }}</small>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="commits.length === 0 && isSeeking === true">
+    <h4>{{ message }}</h4>
+  </div>
+
+  <div *ngIf="commits.length === 0 && isSeeking === false">
+    <h4>{{ message }}</h4>
+  </div>
+</div>

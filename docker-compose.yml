@@ -1,0 +1,25 @@
+version: '3'
+services:
+  client: 
+    build: 
+      dockerfile: "client/.docker/Dockerfile"
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./:/app
+  server: 
+    build: 
+      # context: .
+      dockerfile: "server/.docker/Dockerfile"
+    ports:
+      - "3000:3000"
+    env_file:
+      - server/.env
+    volumes:
+      - ./:/app
+networks:
+  github:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 23.5.0.0/16

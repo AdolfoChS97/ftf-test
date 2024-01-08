@@ -1,0 +1,182 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Github API Swagger Documentation",
+    "version": "1.0.0",
+    "description": "This is an API which has been built to interact with the Github API.",
+    "license": {
+      "name": "MIT",
+      "url": "https://spdx.org/licenses/MIT.html"
+    },
+    "contact": {
+      "name": "Adolfo Chafardett",
+      "url": "https://github.com/AdolfoChS97",
+      "email": "adolfo1997a@gmail.com"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "definitions": {
+    "Commit": {
+      "type": "object",
+      "properties": {
+        "sha": {
+          "type": "string",
+          "description": "The commit ID"
+        },
+        "message": {
+          "type": "string",
+          "description": "The commit message"
+        },
+        "author": {
+          "type": "object",
+          "description": "The commit author",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The author name"
+            },
+            "email": {
+              "type": "string",
+              "description": "The author email"
+            },
+            "date": {
+              "type": "string",
+              "description": "The commit date"
+            }
+          },
+          "required": ["name", "email", "date"]
+        }
+      },
+      "description": "A commit object"
+    }
+  },
+
+  "paths": {
+    "/github/{owner}/{repo}/commits": {
+      "get": {
+        "tags": ["Commits"],
+        "summary": "Get all commits from a repository",
+        "description": "Get all commits from a repository",
+        "operationId": "getCommits",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "The owner of the repository",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "description": "The name of the repository",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "author",
+            "in": "query",
+            "description": "GitHub login or email address by which to filter by commit author",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Only commits after this date will be returned",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "until",
+            "in": "query",
+            "description": "Only commits before this date will be returned",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Results per page (max 100)",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the results to fetch",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/Commit"
+                  },
+                  "meta": {
+                    "type": "integer",
+                    "description": "The total number of commits",
+                    "example": 1
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "A message to the user",
+                    "example": "OK"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "A message to the user",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "A message to the user",
+                  "example": "Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "A message to the user",
+                  "example": "Internal Server Error detailed"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
