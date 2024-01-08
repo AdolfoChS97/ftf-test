@@ -17,6 +17,7 @@ services:
       - server/.env
     volumes:
       - ./:/app-server
+      - /app-server/server/node_modules
 networks:
   github:
     driver: bridge
