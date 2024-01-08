@@ -1,11 +1,9 @@
 FROM node:18
 
-WORKDIR /app/client
+WORKDIR /usr/src/app-client
+COPY . /usr/src/app-client/
 
-# Copy only necessary files
-COPY . /app/client/
-
-WORKDIR /app/client/client
+WORKDIR /usr/src/app-client/client
 
 RUN npm install
 RUN npm install -g @angular/cli

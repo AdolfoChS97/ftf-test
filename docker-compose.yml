@@ -6,7 +6,7 @@ services:
     ports:
       - "4200:4200"
     volumes:
-      - ./:/app
+      - ./:/app-client
   server: 
     build: 
       # context: .
@@ -16,7 +16,7 @@ services:
     env_file:
       - server/.env
     volumes:
-      - ./:/app
+      - ./:/app-server
 networks:
   github:
     driver: bridge
