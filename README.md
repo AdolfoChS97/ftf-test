@@ -10,7 +10,11 @@ This repository has been created with the purpose to show how to use the Github 
 To use this project you need to have installed the following tools:
 - Docker
 
+
+
 You can define the environment variables in the file .env that you can find in the root of the server folder. If you don't know which value you need to set in the environment variables, you can check the file .env.example. You also can follow this tutorial to get a Github token: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+
+you should create a .env file in server folder with the following variables:
 
 ``` bash
 GITHUB_USER: < Github token to get the commits >
